@@ -1,3 +1,8 @@
+/*
+Notes: 
+- https://www.enjoyalgorithms.com/blog/deletion-in-binary-search-tree
+
+*/
 class Node {
   constructor(data) {
     this.data = data;
@@ -163,6 +168,27 @@ class BinarySearchTree {
     subTree.right = this.deleteBstMin(subTree.right);
     return subTree;
   }
+  bfsTraversal() {
+    if(this.root === null) {
+      return "Tree is empty"
+    }
+    const toBeProcessedQueue = [this.root];
+    const visitedNodes = [];
+    while(toBeProcessedQueue.length > 0) {
+      console.log({toBeProcessedQueue})
+      let firstNode = toBeProcessedQueue.shift();
+      console.log({firstNode})
+      visitedNodes.push(firstNode.data)
+      if(firstNode.left !== null) {
+        toBeProcessedQueue.push(firstNode.left)
+      } 
+      if(firstNode.right !== null) {
+        toBeProcessedQueue.push(firstNode.right)
+      }
+
+    }
+    return visitedNodes
+  }
   bulkInsert(items) {
     items.forEach((item) => {
       this.insertRecur(item);
@@ -188,5 +214,10 @@ bst.bulkInsert(items);
 // console.log(bst.deleteItemRecur(4))
 // console.log(bst.deleteItemRecur(6))
 // console.log(bst.deleteItemRecur(8))
-console.log(bst.deleteItemRecur(5));
+
+console.log("traversal output",bst.bfsTraversal())
+// console.log(bst.deleteItemRecur(5));
 console.log(JSON.stringify(bst));
+
+
+
