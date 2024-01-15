@@ -172,21 +172,20 @@ class BinarySearchTree {
     if(this.root === null) {
       return "Tree is empty"
     }
-    const toBeProcessedQueue = [this.root];
+    const queue = [this.root];
     const visitedNodes = [];
-    while(toBeProcessedQueue.length > 0) {
-      console.log({toBeProcessedQueue})
-      let firstNode = toBeProcessedQueue.shift();
-      console.log({firstNode})
-      visitedNodes.push(firstNode.data)
+    while(queue.length) {
+      const firstNode = queue.shift();
+      // visit first node from queue
+      visitedNodes.push(firstNode.data);
+      // explore first node from queue, check it's left and right, if present push each to queue
       if(firstNode.left !== null) {
-        toBeProcessedQueue.push(firstNode.left)
+        queue.push(firstNode.left)
       } 
       if(firstNode.right !== null) {
-        toBeProcessedQueue.push(firstNode.right)
+        queue.push(firstNode.right)
       }
-
-    }
+    } 
     return visitedNodes
   }
   bulkInsert(items) {
