@@ -169,24 +169,111 @@ class BinarySearchTree {
     return subTree;
   }
   bfsTraversal() {
-    if(this.root === null) {
-      return "Tree is empty"
+    if (this.root === null) {
+      return "Tree is empty";
     }
     const queue = [this.root];
     const visitedNodes = [];
-    while(queue.length) {
+    while (queue.length) {
       const firstNode = queue.shift();
       // visit first node from queue
       visitedNodes.push(firstNode.data);
       // explore first node from queue, check it's left and right, if present push each to queue
-      if(firstNode.left !== null) {
-        queue.push(firstNode.left)
-      } 
-      if(firstNode.right !== null) {
-        queue.push(firstNode.right)
+      if (firstNode.left !== null) {
+        queue.push(firstNode.left);
       }
-    } 
-    return visitedNodes
+      if (firstNode.right !== null) {
+        queue.push(firstNode.right);
+      }
+    }
+    return visitedNodes;
+  }
+  dfsTraversalPreOrder() {
+    //sanity checks
+    if (this.root === null) {
+      return "Tree is empty";
+    }
+    const stack = [];
+    const map = new Map();
+    let pointer = this.root;
+    while (true) {
+      console.log({ stack, map, pointer });
+      // Check if pointer has a left node and it has not already been traversed
+      // let leftPointer = pointer?.left;
+      // console.log({leftPointer})
+
+      // let leftPointerData = leftPointer?.data;
+      // console.log({leftPointerData})
+
+      if (pointer.left && map.get(pointer.left.data) === undefined) {
+        console.log("=>>>> node.left present");
+        // Pointer has a non-traversed left node
+        // push pointer to stack
+        stack.push(pointer);
+        // Since Pointer is traversed now, make an entry in map
+        map.set(pointer.data, pointer);
+        // move pointer to the it's left node
+        pointer = pointer.left;
+      } else if (pointer.right && map.get(pointer.right.data) === undefined) {
+        console.log("=>>>> node.right present");
+
+        // same logic for right as left
+        // Pointer has a non-traversed right node
+        // push pointer to stack
+        stack.push(pointer);
+        // Since Pointer is traversed now, make an entry in map
+        map.set(pointer.data, pointer);
+        // move pointer to the it's right node
+        pointer = pointer.right;
+      } else if (stack.length) {
+        console.log("=>>>> backtracking baby");
+
+        // Pinter is leaf node with no left and right node
+        // Also since stack has nodes in it, that means backtracking is possible
+        map.set(pointer.data, pointer);
+        const lastTraversedNode = stack.pop();
+        pointer = lastTraversedNode;
+      } else {
+        console.log("No more options left, getting out");
+        break;
+      }
+    }
+    return map;
+  }
+  dfsTraversalPreOrderRecursive() {
+    const data = [];
+    function traverse(node) {
+      // root -> left -> right
+      data.push(node.data)
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+    }
+    traverse(this.root)
+    return data
+  }
+  dfsTraversalPostOrderRecursive() {
+    const data = [];
+    function traverse(node) {
+      // left -> right -> root
+
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+      data.push(node.data)
+    }
+    traverse(this.root)
+    return data
+  }
+  dfsTraversalInOrderRecursive() {
+    const data = [];
+    function traverse(node) {
+      // left -> root -> right
+
+      if(node.left) traverse(node.left)
+      data.push(node.data)
+      if(node.right) traverse(node.right)
+    }
+    traverse(this.root)
+    return data
   }
   bulkInsert(items) {
     items.forEach((item) => {
@@ -214,9 +301,11 @@ bst.bulkInsert(items);
 // console.log(bst.deleteItemRecur(6))
 // console.log(bst.deleteItemRecur(8))
 
-console.log("traversal output",bst.bfsTraversal())
+// console.log("traversal output",bst.bfsTraversal())
+// const map = bst.dfsTraversalPreOrder();
+// console.log({ map });
+console.log("preOrder", bst.dfsTraversalPreOrderRecursive())
+console.log("postOrder", bst.dfsTraversalPostOrderRecursive())
+console.log("inOrder", bst.dfsTraversalInOrderRecursive())
 // console.log(bst.deleteItemRecur(5));
-console.log(JSON.stringify(bst));
-
-
-
+// console.log(JSON.stringify(bst));
