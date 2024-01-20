@@ -17,7 +17,7 @@ https://www.enjoyalgorithms.com/blog/introduction-to-heap-data-structure
 
 class MaxBinaryHeap {
   constructor(){
-    this.values = [41,39,33,18,27,12]
+    this.values = []
   } 
   insert(element) {
     this.values.push(element)
@@ -94,11 +94,4 @@ const heap = new MaxBinaryHeap();
 
 heap.insert(55)
 heap.extractMax()
-heap.extractMax()
-heap.extractMax()
-heap.extractMax()
-heap.extractMax()
-heap.extractMax()
-console.log(heap.extractMax())
-console.log(heap.extractMax())
 console.log(heap.values)
