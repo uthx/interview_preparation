@@ -27,20 +27,59 @@ class Graph {
       return `Cannot remove edge, vertex does not exist in graph: ${this.adjacencyList}`;
     }
     // deleting vertex2 from vertex1
-    this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(edges => edges !== vertex2)
+    this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+      (edges) => edges !== vertex2
+    );
 
     // deleting vertex1 from vertex2
-    this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(edges => edges !== vertex1)
+    this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+      (edges) => edges !== vertex1
+    );
   }
   removeVertex(vertex) {
     if (!this.adjacencyList[vertex]) {
       return `Cannot remove vertex, vertex does not exist in graph: ${this.adjacencyList}`;
     }
     let edges = this.adjacencyList[vertex];
-    edges.forEach(edge => {
-      this.removeEdge(vertex, edge)
-    })
-    delete this.adjacencyList[vertex]
+    edges.forEach((edge) => {
+      this.removeEdge(vertex, edge);
+    });
+    delete this.adjacencyList[vertex];
+  }
+  depthFirstTraversalRecur(vertex) {
+    const visited = {};
+    const traversalOrder = [];
+    const depthFirstTraversalRecursive = (vertexIp) => {
+      if (!vertexIp) return null;
+      traversalOrder.push(vertexIp);
+      visited[vertexIp] = true;
+      let edges = this.adjacencyList[vertexIp];
+      edges.forEach((edge) => {
+        if (!visited[edge]) {
+          depthFirstTraversalRecursive(edge);
+        }
+      });
+    };
+    depthFirstTraversalRecursive(vertex);
+    console.log({ visited });
+    return traversalOrder;
+  }
+  depthFirstTraversalIterative(vertex) {
+    const stack = [vertex];
+    const result = [];
+    const visited = {};
+    while (stack.length > 0) {
+      let vertex = stack.pop();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        if(this.adjacencyList[vertex].length) {
+          stack.push(...this.adjacencyList[vertex])
+        }
+      }
+    }
+    console.log({visited});
+    return result
   }
 }
 
@@ -48,9 +87,19 @@ const graph = new Graph();
 graph.addVertex("A");
 graph.addVertex("B");
 graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+graph.addVertex("C");
+
 graph.addEdge("A", "B");
 graph.addEdge("A", "C");
-graph.addEdge("B  ", "C");
+graph.addEdge("B", "D");
+graph.addEdge("C", "E");
+graph.addEdge("D", "E");
+graph.addEdge("D", "F");
+graph.addEdge("E", "F");
+console.log("recur",graph.depthFirstTraversalRecur("A"));
+console.log("iterative",graph.depthFirstTraversalIterative("A"));
 // graph.removeEdge("A", "B")
-graph.removeVertex("A")
-console.log(graph.adjacencyList);
+// console.log(graph.adjacencyList);
