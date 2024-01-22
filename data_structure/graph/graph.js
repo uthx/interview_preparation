@@ -81,6 +81,23 @@ class Graph {
     console.log({visited});
     return result
   }
+  breadthFirstTraversalIterative(vertex) {
+    const queue = [vertex];
+    const visited = {};
+    const result = [];
+    while(queue.length) {
+      const vertex = queue.shift();
+      if(!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        if(this.adjacencyList[vertex].length) {
+          queue.push(...this.adjacencyList[vertex])
+        }
+      }
+    }
+    console.log({visited});
+    return result;
+  }
 }
 
 const graph = new Graph();
@@ -101,5 +118,6 @@ graph.addEdge("D", "F");
 graph.addEdge("E", "F");
 console.log("recur",graph.depthFirstTraversalRecur("A"));
 console.log("iterative",graph.depthFirstTraversalIterative("A"));
+console.log("iterative bfs", graph.breadthFirstTraversalIterative("A"))
 // graph.removeEdge("A", "B")
 // console.log(graph.adjacencyList);
