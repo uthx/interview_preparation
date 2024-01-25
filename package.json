@@ -1,0 +1,16 @@
+{
+  "name": "interview_pnpm aration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "release.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/git": "^10.0.1"
+  }
+}
