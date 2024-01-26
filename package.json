@@ -13,5 +13,8 @@
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.6"
+  },
+  "dependencies": {
+    "@semantic-release/npm": "^11.0.2"
   }
 }
