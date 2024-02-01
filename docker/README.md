@@ -38,11 +38,16 @@
   Basic Volume commands
 
   1- Create a volume mount
-    docker volume create volume-name
+    - docker volume create volume-name
+    - -v todo-mysql-data:/var/lib/mysql
   2- Attach/Mount that volume with the docker container
-    Use the mount flag : --mount type=volume,src=volume_name,target=container/path
-  3- Bind mount example : --mount type=bind,src="$(pwd)",target=/app
+    - Use the mount flag : --mount type=volume,src=volume_name,target=container/path
+  3- Bind mount example
+    - --mount type=bind,src="$(pwd)",target=/app
+    - -v "$(pwd):/app"
 
+3-Network
+  docker network create todo-app
 
 Rough notes
 
