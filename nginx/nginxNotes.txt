@@ -1,0 +1,29 @@
+nginx : Sits in front of your backend servers
+
+Acts as:
+Reverse Proxy
+Load Balancer 
+Performs encryption and decryption, each server don't need to do
+
+
+Installation:
+sudo apt update
+sudo apt install nginx 
+
+Path in ubuntu:
+/etc/nginx/
+
+Important commands:
+start: sudo systemctl start nginx
+status: sudo systemctl status nginx
+stop: sudo systemctl stop nginx
+Check in browser at: http://localhost
+
+
+terminologies
+
+events {  => Context
+	worker_connections 768;  => Directive
+	# multi_accept on;
+}
+
