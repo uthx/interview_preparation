@@ -1,0 +1,18 @@
+Company Link: https://www.samespace.com
+Context: Gave an automated 20 minutes interview, without prior preparation
+How it went: Bad
+Self-Score: 2 of out 10
+Result: Pending
+Lessons learnt: 
+  - Give more mock interviews - improves your self awareness about your skill set
+  - Prepare before taking any sort of interview, read on Glassdoor/AmbitionBox etc for context
+  - Improve your basics, like JS, database queries, helps in answering out of the box questions
+  - Make sure you have know on Fundamental requirements. eg: I know MySQL, JD mentioned MongoDB
+  - System Design stuff is not an option, but a must. Helps you in answering questions about which you have not worked on much. 
+  - Explore questions that you found complete unrelated eg: Singleton pattern. Maybe you are living under a rock
+Key Takeaways:
+  - Give mock interviews
+  - Improve basics: REST, JS, Database, etc
+  - Learn MongoDB
+  - Learn System Design
+  - Explore unrelated stuff
