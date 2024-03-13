@@ -112,7 +112,7 @@ class LinkedList {
     let currentPointer = this.head;
     let prevPointer = null;
     while (currentPointer !== null) {
-      console.log({currentPointer, prevPointer})
+      console.log({ currentPointer, prevPointer })
       // match found
       if (currentPointer.data === element) {
         if (prevPointer === null) {
@@ -134,13 +134,47 @@ class LinkedList {
     Removes the given element from the list and return that element. Return -1 if element not found.
     */
   }
+  reverseIterCaller() {
+    this.reverseIteratively(this.head)
+  }
+  reverseIteratively() {
+    if (this.isListEmpty()) {
+      return "List is empty"
+    }
+    let current = this.head, prev = null, next = null;
+    while (current !== null) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    this.head = prev
+    this.printList()
+  }
+  reverseRecurCaller() {
+    this.reverseRecursively(this.head)
+  }
+  reverseRecursively(tempHead) {
+    if (this.isListEmpty()) {
+      return "List is empty"
+    }
+    console.log({ tempHead })
+    if (tempHead.next === null) {
+      this.head = tempHead;
+      return
+    }
+    this.reverseRecursively(tempHead.next);
+    let q = tempHead.next;
+    q.next = tempHead;
+    tempHead.next = null;
+  }
   //helper methods
   indexOf(element) {
     // Return index of the element if it's in the list else -1
     let currentPointer = this.head;
     let indexCount = 0;
-    while(currentPointer !== null) {
-      if(currentPointer.data === element) {
+    while (currentPointer !== null) {
+      if (currentPointer.data === element) {
         return indexCount
       }
       indexCount++
@@ -170,6 +204,22 @@ class LinkedList {
       }
     }
   }
+  printRecurCaller() {
+    this.printRecursivelyReverse(this.head);
+  }
+  printRecursivelyReverse(headNode) {
+    console.log("headNode", headNode)
+    if (headNode === null) {
+      return;
+    }
+    this.printRecursivelyReverse(headNode.next);
+    console.log("value: ", headNode.data)
+  }
+  printRecursivelyForward(headNode) {
+    if (headNode === null) return;
+    console.log("value: ", headNode.data);
+    this.printRecursivelyForward(headNode.next)
+  }
   isListEmpty() {
     return this.head === null;
   }
@@ -181,22 +231,8 @@ const list = new LinkedList();
 list.push("A");
 list.push("B");
 list.push("C");
-// list.push(4)
-// list.unshift(0)
-list.printList();
-console.log("size", list.getSize());
-list.insertAt(2, 6);
-
-list.printList();
-console.log("size", list.getSize());
-
-list.removeFrom(1);
-
-list.printList();
-console.log("size", list.getSize());
-
-console.log("remove element op",list.removeElement(6))
-
-list.printList();
-console.log("size", list.getSize());
-console.log("indexOf op", list.indexOf("A"))
+list.printList()
+// list.printRecurCaller()
+list.reverseRecurCaller()
+list.printList()
+console.log({ list: JSON.stringify(list) })
